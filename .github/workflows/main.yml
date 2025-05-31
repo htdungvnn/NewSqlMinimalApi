@@ -78,7 +78,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t htdung/crud-newsql:latest .
+        run: docker build -t htdung/crud-newsql:latest -f NewSqlMinimalApi/Dockerfile NewSqlMinimalApi
 
       - name: Push Docker image
         run: docker push htdung/crud-newsql:latest
