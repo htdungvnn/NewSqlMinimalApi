@@ -44,9 +44,15 @@ jobs:
         run: echo "CREATE DATABASE IF NOT EXISTS appdb;" | cockroach sql --insecure --host=localhost:26257
 
       - name: Restore dependencies
-        run: dotnet restore NewSqlMinimalApi/NewSqlMinimalApi.sln
-      - name: Build project
-        run: dotnet build --no-restore --configuration Release
+  run: dotnet restore NewSqlMinimalApi.sln
+
+- name: Build project
+  run: dotnet build NewSqlMinimalApi.sln --no-restore --configuration Release
+
+- name: Run tests
+  env:
+    ConnectionStrings__CockroachDb: "Host=localhost;Port=26257;Database=appdb;Username=root;Password=;SSL Mode=Disable"
+  run: dotnet test NewSqlMinimalApi.sln --no-build --verbosity normal
 
       - name: Run tests
         env:
