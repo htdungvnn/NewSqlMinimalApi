@@ -3,7 +3,7 @@
 services:
   cockroachdb:
     image: cockroachdb/cockroach:v23.1.4
-    command: start-single-node --insecure
+    command: ["start-single-node", "--insecure"]
     ports:
       - "26257:26257"    # SQL port
       - "8080:8080"      # Admin UI
