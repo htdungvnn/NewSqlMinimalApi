@@ -66,3 +66,5 @@ app.MapDelete("/products/{id:int}", async (int id, AppDbContext db) =>
 });
 
 app.Run();
+
+public partial class Program { }
