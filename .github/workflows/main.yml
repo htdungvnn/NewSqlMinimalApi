@@ -64,7 +64,9 @@ jobs:
         run: docker stop cockroachdb && docker rm cockroachdb
 
   build-and-push:
+    needs: test
     runs-on: ubuntu-latest
+    if: success()
 
     steps:
       - name: Checkout code
