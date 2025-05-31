@@ -44,8 +44,7 @@ jobs:
         run: echo "CREATE DATABASE IF NOT EXISTS appdb;" | cockroach sql --insecure --host=localhost:26257
 
       - name: Restore dependencies
-        run: dotnet restore
-
+        run: dotnet restore NewSqlMinimalApi/NewSqlMinimalApi.sln
       - name: Build project
         run: dotnet build --no-restore --configuration Release
 
@@ -57,7 +56,7 @@ jobs:
       - name: Stop CockroachDB container
         if: always()
         run: docker stop cockroachdb && docker rm cockroachdb
-        
+
   build-and-push:
     needs: test
     runs-on: ubuntu-latest
