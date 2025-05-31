@@ -1,0 +1,26 @@
+﻿version: "3.9"
+
+services:
+  cockroachdb:
+    image: cockroachdb/cockroach:v23.1.4
+    command: start-single-node --insecure
+    ports:
+      - "26257:26257"    # SQL port
+      - "8080:8080"      # Admin UI
+    volumes:
+      - cockroach-data:/cockroach/cockroach-data
+
+  api:
+    build:
+      context: .
+      dockerfile: NewSqlMinimalApi/Dockerfile
+    ports:
+      - "5001:80"
+    depends_on:
+      - cockroachdb
+    environment:
+      - ConnectionStrings__CockroachDb=Host=cockroachdb;Port=26257;Database=appdb;Username=root;Password=;SSL Mode=Disable
+
+
+volumes:
+  cockroach-data:

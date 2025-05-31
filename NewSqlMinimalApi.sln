@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewSqlMinimalApi", "NewSqlMinimalApi\NewSqlMinimalApi.csproj", "{068A709C-1205-437C-AC0E-2C3FA81422C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5F64C52-5320-448C-B4C1-0F1E87B8C372}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{068A709C-1205-437C-AC0E-2C3FA81422C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{068A709C-1205-437C-AC0E-2C3FA81422C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{068A709C-1205-437C-AC0E-2C3FA81422C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{068A709C-1205-437C-AC0E-2C3FA81422C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
