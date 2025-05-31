@@ -8,6 +8,8 @@ on:
 jobs:
 
   build-and-push:
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -19,7 +21,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t htdung/crud-newsql:latest .
+        run: docker build -t htdung/crud-newsql:latest
 
       - name: Push Docker image
         run: docker push htdung/crud-newsql:latest
