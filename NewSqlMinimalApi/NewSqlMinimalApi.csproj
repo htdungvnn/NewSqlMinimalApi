@@ -17,10 +17,4 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.2" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
-    </ItemGroup>
-
 </Project>

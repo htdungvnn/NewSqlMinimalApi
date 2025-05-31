@@ -5,6 +5,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5F64C52-5320-448C-B4C1-0F1E87B8C372}"
 	ProjectSection(SolutionItems) = preProject
 		compose.yaml = compose.yaml
+		Dockerfile = Dockerfile
+		.dockerignore = .dockerignore
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewSqlMinimalApi.Tests", "NewSqlMinimalApi.Tests\NewSqlMinimalApi.Tests.csproj", "{6BDCD444-33DC-47AC-8BBB-E5CB75B44012}"
