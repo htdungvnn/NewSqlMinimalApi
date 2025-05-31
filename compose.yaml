@@ -21,6 +21,13 @@ services:
     environment:
       - ConnectionStrings__CockroachDb=Host=cockroachdb;Port=26257;Database=appdb;Username=root;Password=;SSL Mode=Disable
 
+  test:
+    build: .
+    depends_on:
+      - cockroachdb
+    environment:
+      - ConnectionStrings__CockroachDb=Host=cockroachdb;Port=26257;Database=appdb;Username=root;Password=;SSL Mode=Disable
+    command: dotnet test --no-build --verbosity normal
 
 volumes:
   cockroach-data:
