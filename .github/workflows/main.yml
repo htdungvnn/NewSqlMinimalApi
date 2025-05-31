@@ -53,6 +53,7 @@ jobs:
 
 
       - name: Run tests
+        working-directory: NewSqlMinimalApi
         env:
           ConnectionStrings__CockroachDb: "Host=localhost;Port=26257;Database=appdb;Username=root;Password=;SSL Mode=Disable"
         run: dotnet test --no-build --verbosity normal
