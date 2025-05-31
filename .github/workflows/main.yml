@@ -7,6 +7,62 @@ on:
 
 jobs:
 
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Start CockroachDB container
+        run: |
+          docker run -d --name cockroachdb -p 26257:26257 -p 8080:8080 cockroachdb/cockroach:v23.1.4 start-single-node --insecure
+
+      - name: Wait for CockroachDB to be ready
+        run: |
+          sudo apt-get update && sudo apt-get install -y netcat-openbsd
+          for i in {1..10}; do
+            if nc -z localhost 26257; then
+              echo "CockroachDB is up!"
+              break
+            fi
+            echo "Waiting for CockroachDB to be ready..."
+            sleep 5
+          done
+
+      - name: Install Cockroach CLI
+        run: |
+          curl https://binaries.cockroachdb.com/cockroach-v23.1.4.linux-amd64.tgz | tar -xz
+          sudo cp -i cockroach-v23.1.4.linux-amd64/cockroach /usr/local/bin/
+          cockroach version
+
+      - name: Create database appdb
+        run: echo "CREATE DATABASE IF NOT EXISTS appdb;" | cockroach sql --insecure --host=localhost:26257
+
+      - name: Restore dependencies
+        working-directory: NewSqlMinimalApi
+        run: dotnet restore
+
+      - name: Build project
+        working-directory: NewSqlMinimalApi
+        run: dotnet build --no-restore --configuration Release
+
+
+      - name: Run tests
+        working-directory: NewSqlMinimalApi
+        env:
+          ConnectionStrings__CockroachDb: "Host=localhost;Port=26257;Database=appdb;Username=root;Password=;SSL Mode=Disable"
+        run: dotnet test --no-build --verbosity normal
+
+      - name: Stop CockroachDB container
+        if: always()
+        run: docker stop cockroachdb && docker rm cockroachdb
+
   build-and-push:
     runs-on: ubuntu-latest
 
